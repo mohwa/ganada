@@ -56,6 +56,7 @@ const COMPLEX_VOWELS = [
     ['ㅡ','ㅣ','ㅢ']
 ];
 
+const BASE_HASH_CODE = 0xAC00; // `가` 문자에 대한, 해시코드
 
 /**
  * Ganada 객체
@@ -84,7 +85,7 @@ function _isComplete(v = ''){
 
     let ret = true;
 
-    const startCharCode = parseInt('0xAC00', 16);
+    const startCharCode = parseInt(BASE_HASH_CODE, 16);
     const endCharCode = parseInt('0xD7A3', 16);
 
     v = v.split('');
@@ -595,13 +596,11 @@ function _JAMOAssemble(cho = '', jung = '', jong = ''){
     const jungIndex = JUNG_ATOM.indexOf(jung);
     const jongIndex = JONG_ATOM.indexOf(jong);
 
-    const baseHash = 0xAC00;
-
     let charCode;
 
     if (choIndex > -1 && jungIndex > -1 && jongIndex > -1){
         // 초/중/종 조합
-        charCode = baseHash + (choIndex * 21 + jungIndex) * 28 + jongIndex;
+        charCode = BASE_HASH_CODE + (choIndex * 21 + jungIndex) * 28 + jongIndex;
     }
 
     if (charCode){
@@ -645,7 +644,7 @@ function _JAMODisassemble(v = ''){
     **/
 
     // `0xAC00` 16진수값은 유니코드 `가` 값이 가지는, 메모리 주소이다.(`0xAC01(각)`, `0xAC01(갂)`...)
-    v = v.charCodeAt(0) - parseInt('0xAC00', 16);
+    v = v.charCodeAt(0) - parseInt(BASE_HASH_CODE, 16);
 
     // 초성 요소의 자리 수
     const choIndex = parseInt((v / (21 * 28)), 10);
