@@ -28,7 +28,7 @@ const config = {
         filename: '[name].js',
         libraryTarget: 'umd',
         path: buildPath,
-        library: 'ProxyShim'
+        library: 'Ganada'
     },
     module: {
         rules: [

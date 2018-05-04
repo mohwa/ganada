@@ -17,13 +17,13 @@ const rootPath = path.join(__dirname, '..');
 const srcPath = path.join(rootPath, 'src');
 const buildPath = path.join(rootPath, 'dist');
 
-const entry = path.join(srcPath, 'proxy-shim');
+const entry = path.join(srcPath, 'ganada');
 const testEntry = path.join(rootPath, 'test/index.js');
 
 const config = {
     entry: {
         "index": testEntry,
-        "proxy-shim": entry
+        "ganada": entry
     },
     devServer: {
         host: 'localhost',

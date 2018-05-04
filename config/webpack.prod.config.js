@@ -19,12 +19,12 @@ const rootPath = path.join(__dirname, '..');
 const srcPath = path.join(rootPath, 'src');
 const buildPath = path.join(rootPath, 'dist');
 
-const entry = path.join(srcPath, 'proxy-shim');
+const entry = path.join(srcPath, 'ganada');
 
 const config = {
     entry: {
-        "proxy-shim": entry,
-        "proxy-shim.min": entry
+        "ganada": entry,
+        "ganada.min": entry
     },
     plugins: [
         new UglifyJsPlugin({
