@@ -56,7 +56,7 @@ const COMPLEX_VOWELS = [
     ['ㅡ','ㅣ','ㅢ']
 ];
 
-const BASE_HASH_CODE = 0xAC00; // `가` 문자에 대한, 해시코드
+const BASE_HASH_CODE = '0xAC00'; // `가` 문자에 대한, 해시코드
 
 /**
  * Ganada 객체
@@ -133,6 +133,8 @@ function _isCho(v = ''){
             break;
         }
     }
+
+    return ret;
 }
 
 /**
@@ -161,6 +163,8 @@ function _isJung(v = ''){
             break;
         }
     }
+
+    return ret;
 }
 
 /**
@@ -189,6 +193,8 @@ function _isJong(v = ''){
             break;
         }
     }
+
+    return ret;
 }
 
 /**
@@ -211,8 +217,8 @@ function _disassemble(v = ''){
             const jamo = _JAMODisassemble(vv);
 
             const cho = CHO[jamo.choIndex];
-            const jung = _getDividedChar(JUNG, jamo.jungIndex);
-            const jong = _getDividedChar(JONG, jamo.jongIndex);
+            const jung = _getComposedChar(JUNG, jamo.jungIndex);
+            const jong = _getComposedChar(JONG, jamo.jongIndex);
 
             ret += `${cho}${jung}${jong}`;
         }
@@ -232,7 +238,7 @@ function _disassemble(v = ''){
      * @returns {string}
      * @private
      */
-    function _getDividedChar(o = [], idx = -1){
+    function _getComposedChar(o = [], idx = -1){
 
         let ret = '';
 
@@ -600,7 +606,7 @@ function _JAMOAssemble(cho = '', jung = '', jong = ''){
 
     if (choIndex > -1 && jungIndex > -1 && jongIndex > -1){
         // 초/중/종 조합
-        charCode = BASE_HASH_CODE + (choIndex * 21 + jungIndex) * 28 + jongIndex;
+        charCode = Number(BASE_HASH_CODE) + (choIndex * 21 + jungIndex) * 28 + jongIndex;
     }
 
     if (charCode){
