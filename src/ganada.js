@@ -1,8 +1,4 @@
 
-/**
- * Ganada 클래스
- */
-
 // 한글 음절: https://ko.wikipedia.org/wiki/%ED%95%9C%EA%B8%80_%EC%9D%8C%EC%A0%88
 
 // 초성
@@ -60,6 +56,10 @@ const COMPLEX_VOWELS = [
     ['ㅡ','ㅣ','ㅢ']
 ];
 
+
+/**
+ * Ganada 객체
+ */
 
 const Ganada = {
     isComplete: _isComplete,
