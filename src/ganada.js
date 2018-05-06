@@ -30,21 +30,6 @@ const COMPLEX_CONSONANTS = [
     ['ㅂ','ㅅ','ㅄ']
 ];
 
-// 서로 다른 두 개의 자음으로 이루어진 받침(원본)
-const COMPLEX_CONSONANTS_ATOM = [
-    'ㄳ',
-    'ㄵ',
-    'ㄶ',
-    'ㄺ',
-    'ㄻ',
-    'ㄼ',
-    'ㄽ',
-    'ㄾ',
-    'ㄿ',
-    'ㅀ',
-    'ㅄ'
-];
-
 // 서로 다른 두 개의 모음으로 구성된 복합 모음
 const COMPLEX_VOWELS = [
     ['ㅗ','ㅏ','ㅘ'],
@@ -68,7 +53,8 @@ const Ganada = {
     isJung: _isJung,
     isJong: _isJong,
     disassemble: _disassemble,
-    assemble: _assemble
+    assemble: _assemble,
+    search: _search
 };
 
 /**
@@ -79,7 +65,7 @@ const Ganada = {
  * @returns {boolean}
  * @private
  */
-function _isComplete(v = ''){
+function _isComplete(v){
 
     if (typeof v !== 'string') return false;
 
@@ -115,7 +101,7 @@ function _isComplete(v = ''){
  * @returns {boolean}
  * @private
  */
-function _isCho(v = ''){
+function _isCho(v){
 
     if (typeof v !== 'string') return false;
 
@@ -145,7 +131,7 @@ function _isCho(v = ''){
  * @returns {boolean}
  * @private
  */
-function _isJung(v = ''){
+function _isJung(v){
 
     if (typeof v !== 'string') return false;
 
@@ -175,7 +161,7 @@ function _isJung(v = ''){
  * @returns {boolean}
  * @private
  */
-function _isJong(v = ''){
+function _isJong(v){
 
     if (typeof v !== 'string') return false;
 
@@ -196,6 +182,31 @@ function _isJong(v = ''){
 
     return ret;
 }
+
+/**
+ * 첫번째 문자열이 분해된 배열 순서가, 두번째 문자열의 배열 순서를 포함한 문자(열)를 반환한다.
+ *
+ * @param v
+ * @param searchText
+ * @returns {string}
+ * @private
+ */
+function _search(v = '', searchText = ''){
+
+    let ret = '';
+
+    const _v = _disassemble(v);
+    const _searchText = _disassemble(searchText);
+
+    const ptn = new RegExp(_searchText, 'g');
+
+    let searchText = _v.match(ptn);
+
+    if (searchText) ret = _assemble(searchText[0]);
+
+    return ret;
+}
+
 
 /**
  *
