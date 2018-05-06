@@ -200,7 +200,7 @@ function _search(v = '', searchText = ''){
 
     const ptn = new RegExp(_searchText, 'g');
 
-    let searchText = _v.match(ptn);
+    searchText = _v.match(ptn);
 
     if (searchText) ret = _assemble(searchText[0]);
 

@@ -29,12 +29,13 @@ const Ganada = require('ganada');
 
 ## API 목록
 
-|Func|Params|Type|Return|Description|
+|Func|Params|Types|Return|Description|
 |:--:|:--:|:--:|:-----:|:----------|
 |`isComplete`|v|`{String}`|`{Boolean}`|전달받은 문자(열)이 완성된 문자인지 여부를 반환한다.|
 |`isCho`|v|`{String}`|`{Boolean}`|전달받은 문자(열)의 초성 여부를 반환한다.|
 |`isJung`|v|`{String}`|`{Boolean}`|전달받은 문자(열)의 중성 여부를 반환한다.|
 |`isJong`|v|`{String}`|`{Boolean}`|전달받은 문자(열)의 종성 여부를 반환한다.|
+|`search`|v, searchText|`{String}`, `{String}`|`{Boolean}`|첫번째 문자열이 분해된 배열 순서가, 두번째 문자열의 배열 순서를 포함한 문자(열)를 반환한다.|
 |`disassemble`|v|`{String}`|`{String}`|전달받은 문자(열)들을 자음/모음으로 분해시킨다.|
 |`assemble`|v|`{String}`|`{String}`|전달받은 자음/모음을 문자(열)로 조립한다|
 
@@ -80,6 +81,19 @@ console.log(Ganada.isJong('ㅎㄱ')); // true
 console.log(Ganada.isJong('ㅎㄱㄸ')); // false
 
 ```
+
+`search` 메서드
+```
+
+const Ganada = require('ganada');
+
+console.log(Ganada.search('가생이닷컴', 'ㄱㅏㅅㅐㅇ')); // 가생
+// [ㄱㅏㅅㅐㅇㅇㅣㄷㅏㅅ..] 배열 순서는 [ㄱㅏㅅㅐㅇ] 배열 순서를 정확히 포함한다.
+console.log(Ganada.search('가생이닷컴', 'ㄱㅏㅅㅐ')); // 가새
+console.log(Ganada.search('가생이닷컴', 'ㄱㅏㅅㅐㅅ')); // ''
+
+```
+
 
 `disassemble` 메서드
 ```
